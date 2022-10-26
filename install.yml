@@ -1,0 +1,14 @@
+---
+ - name: package installation
+   become: true
+   hosts: all
+   tasks:
+     - name: package
+       yum:
+         name: ["git", "tree"]
+         state: present
+
+     - name: latest
+       yum:
+         name: tree
+         state: latest

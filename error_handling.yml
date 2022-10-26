@@ -1,0 +1,35 @@
+---
+- name: error-handling playbook
+  become: true
+  hosts: all
+  tasks:
+  - name: package httpd install
+    yum:
+      name: httpd
+      state: present
+    when: ansible_os_family == "RedHat"
+
+  - name: start httpd service
+    service:
+      name: httpd---      # error mentioned intentionally
+      state: started
+    when: ansible_os_family == "RedHat"
+    ignore_errors: yes
+
+  - name: package apache2
+    apt:
+      name: apache2
+      state: present
+    when: ansible_os_family == "Dibian"
+      
+  - name: start apache2
+    service:
+      name: apache2
+      state: started
+    when: ansible_os_family == "Dibian"
+
+  - name: copy index.html
+    copy:
+      src: /home/hari/index.html
+      dest: /var/www/html
+      mode: 0666

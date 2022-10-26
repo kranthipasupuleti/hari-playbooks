@@ -1,0 +1,10 @@
+---
+- name: delete directory
+  hosts: new
+  become: true
+  tasks:
+   - name: deleting directory
+     file:
+      path: /home/hari/dir
+      state: absent
+

@@ -1,0 +1,9 @@
+---
+- name: New User Created a Script
+  hosts: new
+  become: true
+  tasks:
+    - name: create a user uday
+      user: 
+       name: uday
+

@@ -1,0 +1,13 @@
+---
+ - name: update package
+   become: true
+   hosts: new
+   tasks:
+     - name: latest package
+       yum:
+         name: git,httpd
+         state: latest
+     - name: start service
+       service:
+         name: httpd
+         state: reloaded

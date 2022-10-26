@@ -1,0 +1,33 @@
+---
+ - name: tomcat
+   hosts: all
+   become: true
+   tasks:
+     - name: java
+       yum:
+         name: java
+         state: present
+       when: ansible_os_family == "RedHat"
+
+     - name: tomcat download
+       get_url:
+         url: https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.83/bin/apache-tomcat-8.5.83.tar.gz
+         dest: /opt
+
+     - name: extracting file
+       unarchive:
+         src: /opt/apache-tomcat-8.5.83.tar.gz 
+         dest: /opt
+         remote_src: True
+
+     - name: permisions
+       file:
+         path: /opt/apache-tomcat-8.5.83/bin/startup.sh
+         mode: 0777
+       
+     - name: starting tomact
+       shell: nohup ./startup.sh
+       args:
+         chdir: /opt/apache-tomcat-8.5.83/bin/
+
+

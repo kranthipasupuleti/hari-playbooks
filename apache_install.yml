@@ -1,0 +1,28 @@
+---
+ - name: Package install and run
+   hosts: all
+   become: true
+   tasks:
+     - name: httpd install
+       yum:
+         name: httpd
+         state: present
+       when: ansible_os_family == "RedHat"
+
+     - name: httpd start
+       service:
+         name: httpd
+         state: started
+       when: ansible_os_family == "RedHat"
+        
+     - name: apache2
+       apt:
+         name: apache2
+         state: present
+       when: ansible_os_family == "Dibian"
+
+     - name: apache2 install
+       service: 
+         name: apache2
+         state: started
+       when: ansible_os_family == "dibian"

@@ -1,0 +1,9 @@
+---
+- name: directory
+  hosts: new[0]
+  become: true
+  tasks:
+   - name: creating directory
+     file: 
+      path: /home/hari/dir
+      state: directory

@@ -1,0 +1,11 @@
+---
+ - name: copying file
+   become: true
+   hosts: all
+   tasks:
+     - name: copy a file
+       copy:
+         src: /home/hari/index.html
+         dest: /home/hari
+         mode: 0600
+         owner: smaran

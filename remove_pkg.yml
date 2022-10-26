@@ -1,0 +1,10 @@
+---
+ - name: remove package
+   become: true
+   hosts: all
+   tasks:
+     - name: remove
+       yum:
+         name: ["git*", "httpd*", "apache*"]
+         state: absent
+

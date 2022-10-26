@@ -1,0 +1,20 @@
+---
+ - name: package installation
+   become: true
+   hosts: all
+   tasks:
+     - name: package
+       yum:
+         name: git,httpd
+         state: present
+     
+     - name: service
+       service:
+         name: httpd
+         state: started
+
+     - name: copy file
+       copy:
+         src: /home/hari/index.html
+         dest: /var/www/html
+         mode: 0666

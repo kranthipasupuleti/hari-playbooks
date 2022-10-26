@@ -1,0 +1,9 @@
+---
+- name: My Testfile
+  hosts: new
+  become: true
+  tasks:
+    - name: Test demo
+      file:
+       path: /home/uday/demo
+       state: touch
